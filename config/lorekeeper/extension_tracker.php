@@ -20,5 +20,14 @@ return [
         ]),
         'version' => '1.0.1',
     ],
+	
+	'third_subtype' => [
+        'key' => 'third_subtype',
+        'wiki_key' => 'Third_Subtype',
+        'creators' => json_encode([
+			'Speedy' => 'https://github.com/SpeedyD/',
+        ]),
+        'version' => '1.0.0',
+    ],
 
 ];

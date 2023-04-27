@@ -120,6 +120,11 @@ Traits
     {!! Form::select('subtype_id_2', $subtypes, old('subtype_id_2') ? : $character->image->subtype_id_2, ['class' => 'form-control', 'id' => 'subtype']) !!}
 </div>
 
+<div class="form-group" id="subtypes_3">
+    {!! Form::label('Third Subtype (Optional)') !!} 
+    {!! Form::select('subtype_id_3', $subtypes, old('subtype_id_3') ? : $character->image->subtype_id_3, ['class' => 'form-control', 'id' => 'subtype']) !!}
+</div>
+
 <div class="form-group">
     {!! Form::label('Character Rarity') !!}
     {!! Form::select('rarity_id', $rarities, old('rarity_id') ? : $character->image->rarity_id, ['class' => 'form-control']) !!}
@@ -299,6 +304,9 @@ $( "#species" ).change(function() {
   $.ajax({
     type: "GET", url: "{{ url('admin/character/image/subtype/2') }}?species="+species+"&id="+id, dataType: "text"
   }).done(function (res) { $("#subtypes_2").html(res); }).fail(function (jqXHR, textStatus, errorThrown) { alert("AJAX call failed: " + textStatus + ", " + errorThrown); });
+  $.ajax({
+    type: "GET", url: "{{ url('admin/character/image/subtype/3') }}?species="+species+"&id="+id, dataType: "text"
+  }).done(function (res) { $("#subtypes_3").html(res); }).fail(function (jqXHR, textStatus, errorThrown) { alert("AJAX call failed: " + textStatus + ", " + errorThrown); });
 
 });
 
