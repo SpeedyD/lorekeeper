@@ -128,6 +128,7 @@
         </div>
 
         @yield('scripts')
+        @include('layouts._pagination_js')
         <script>
             $(function() {
                 $('[data-toggle="tooltip"]').tooltip({html: true});

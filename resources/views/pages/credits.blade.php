@@ -46,6 +46,9 @@
         <a href="http://wiki.lorekeeper.me/index.php?title=Extensions:MYO_Item_Tag"><strong>MYO Item Tag</strong></a> by <a href="https://github.com/junijwi">Junijwi</a>
     </p>
     <p class="mb-0 col-md-4">
+        <a href="http://wiki.lorekeeper.me/index.php?title=Extensions:Pagination_Page_Select"><strong>Pagination Page Selector</strong></a> by <a href="https://github.com/SpeedyD">Speedy</a> and <a href="https://github.com/AW0005">Moif</a>
+    </p>
+    <p class="mb-0 col-md-4">
         <a href="http://wiki.lorekeeper.me/index.php?title=Extensions:User_Transfer_Reasons"><strong>User Transfer Reasons</strong></a> by <a href="https://github.com/snupsplus">Snupsplus</a>
     </p>
     <p class="mb-0 col-md-4">
