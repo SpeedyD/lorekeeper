@@ -236,6 +236,56 @@ class WorldController extends Controller
     }
 
     /**
+     * Shows the visual trait list for all traits.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function getKitchenSinkFeatures(Request $request) {
+        $categories = FeatureCategory::orderBy('sort', 'DESC')->get();
+        $rarities = Rarity::orderBy('sort', 'ASC')->get();
+
+        $features = count($categories) ?
+        $query = Feature::visible()
+            ->orderByRaw('FIELD(feature_category_id,'.implode(',', $categories->pluck('id')->toArray()).')')
+            ->orderByRaw('FIELD(rarity_id,'.implode(',', $rarities->pluck('id')->toArray()).')')
+            ->orderBy('has_image', 'DESC')
+            ->orderBy('name')
+            ->get()
+            ->groupBy(['feature_category_id', 'id']) :
+        $query = Feature::visible()
+            ->orderByRaw('FIELD(rarity_id,'.implode(',', $rarities->pluck('id')->toArray()).')')
+            ->orderBy('has_image', 'DESC')
+            ->orderBy('name')
+            ->get()
+            ->groupBy(['feature_category_id', 'id']);
+
+        return view('world.kitchensink_features', [
+            'categories' => $categories->keyBy('id'),
+            'rarities'   => $rarities->keyBy('id'),
+            'features'   => $features,
+        ]);
+    }
+
+    /**
+     * Provides a single trait's description html for use in a modal. (Kitchen Sink Trait Index).
+     *
+     * @param mixed $id
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function getKitchenSinkFeatureDetail($id) {
+        $feature = Feature::where('id', $id)->first();
+
+        if (!$feature) {
+            abort(404);
+        }
+
+        return view('world._feature_entry', [
+            'feature' => $feature,
+        ]);
+    }
+
+    /**
      * Shows the items page.
      *
      * @param  \Illuminate\Http\Request  $request
