@@ -28,6 +28,9 @@
                                     @endif
                                     <p>
                                         {!! $feature->first()->displayName !!}
+                                        @if($feature->first()->subtype)
+                                            <br/>({!! $feature->first()->subtype->displayName !!} Subtype)
+                                        @endif
                                     </p>
                                 </div>
                             @endforeach
@@ -40,12 +43,12 @@
 @endsection
 
 @section('scripts')
-	<script>
-		$(document).ready(function() {
-			$('.modal-image').on('click', function(e) {
-				e.preventDefault();
-				loadModal("{{ url('world/kitchensink/trait') }}/" + $(this).data('id'), 'Trait Detail');
-			});
-		})
-	</script>
+    <script>
+        $(document).ready(function() {
+            $('.modal-image').on('click', function(e) {
+                e.preventDefault();
+                loadModal("{{ url('world/kitchensink/trait') }}/" + $(this).data('id'), 'Trait Detail');
+            });
+        })
+    </script>
 @endsection
