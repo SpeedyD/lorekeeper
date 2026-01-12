@@ -143,4 +143,7 @@ return [
 
     // Show Species-only traits in dropdown - Speedy
     'show_exlusively_species_traits_in_dropdown' => 0, // If enabled, will only show traits from the associated species as well as traits that aren't species-limited in the dropdown menus.
+
+    // Limit Userpage Sublists to Characters - Speedy
+    'limit_userpage_sublists_to_characters' => 0, // If enabled, will only show sub masterlists on user pages that the characters owned by the user belong to.
 ];
