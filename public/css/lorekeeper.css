@@ -68,6 +68,17 @@ body {
     height: auto !important;
 }
 
+.mobile-handle {
+    font-size: 1.75rem;
+    position: absolute;
+    top: -1rem;
+    right: 0;
+}
+
+.mobile-handle i {
+    transform: rotate(-25deg);
+}
+
 /**************************************************************************************************
 
     Layout
@@ -761,4 +772,16 @@ tr.accountbound {
 
 .content-warning:hover {
     filter: none;
+}
+
+/* CODE EDITOR *************************************************************************************/
+#ace-code-editor-wrapper .editor-btn {
+    background: white;
+    font-size: 14px;
+    height: 34px;
+    width: 34px;
+}
+
+#ace-code-editor-wrapper .editor-btn:hover {
+    background: buttonface;
 }

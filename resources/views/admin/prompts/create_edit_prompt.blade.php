@@ -30,7 +30,10 @@
 
     <div class="form-group">
         {!! Form::label('World Page Image (Optional)') !!} {!! add_help('This image is used only on the world information pages.') !!}
-        <div>{!! Form::file('image') !!}</div>
+        <div class="custom-file">
+            {!! Form::label('image', 'Choose file...', ['class' => 'custom-file-label']) !!}
+            {!! Form::file('image', ['class' => 'custom-file-input']) !!}
+        </div>
         <div class="text-muted">Recommended size: 100px x 100px</div>
         @if ($prompt->has_image)
             <div class="form-check">
@@ -90,10 +93,16 @@
         {!! Form::select('hide_submissions', [0 => 'Submissions Visible After Approval', 1 => 'Hide Submissions Until Prompt Ends', 2 => 'Hide Submissions Always'], $prompt->hide_submissions, ['class' => 'form-control']) !!}
     </div>
 
-    <h3>Rewards</h3>
-    <p>Rewards are credited on a per-user basis. Mods are able to modify the specific rewards granted at approval time.</p>
-    <p>You can add loot tables containing any kind of currencies (both user- and character-attached), but be sure to keep track of which are being distributed! Character-only currencies cannot be given to users.</p>
-    @include('widgets._loot_select', ['loots' => $prompt->rewards, 'showLootTables' => true, 'showRaffles' => true])
+    {{-- blade-formatter-disable --}}
+    @include('widgets._add_rewards', [
+        'object' => $prompt,
+        'useForm' => false,
+        'showRaffles' => true,
+        'showLootTables' => true,
+        'showRecipient' => true,
+        'info' => '<p>User rewards are credited on a per-user basis, character rewards are rewarded to all characters attached. Mods are able to modify the specific rewards granted at approval time.</p><p class="mb-0">You can add loot tables containing any kind of currencies (both user- and character-attached), but be sure to keep track of which are being distributed! <strong>Character-only currencies cannot be given to users.</strong></p>',
+    ])
+    {{-- blade-formatter-enable --}}
 
     <div class="text-right">
         {!! Form::submit($prompt->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
@@ -101,9 +110,12 @@
 
     {!! Form::close() !!}
 
-    @include('widgets._loot_select_row', ['showLootTables' => true, 'showRaffles' => true])
-
     @if ($prompt->id)
+        @include('widgets._add_limits', [
+            'object' => $prompt,
+            'hideAutoUnlock' => true,
+        ])
+
         <h3>Preview</h3>
         <div class="card mb-3">
             <div class="card-body">
@@ -115,8 +127,8 @@
 
 @section('scripts')
     @parent
-    @include('js._loot_js', ['showLootTables' => true, 'showRaffles' => true])
     @include('widgets._datetimepicker_js')
+    @include('js._tinymce_wysiwyg')
     <script>
         $(document).ready(function() {
             $('.delete-prompt-button').on('click', function(e) {

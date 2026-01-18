@@ -16,25 +16,25 @@
         {!! RecaptchaV3::initJs() !!}
     @endif
 
-    <title>{{ config('lorekeeper.settings.site_name', 'Lorekeeper') }} -@yield('title')</title>
+    <title>{{ config('lorekeeper.settings.site_name', 'Lorekeeper') }}{!! View::hasSection('title') ? ' - ' . trim(View::getSection('title')) : '' !!}</title>
 
     <!-- Primary Meta Tags -->
-    <meta name="title" content="{{ config('lorekeeper.settings.site_name', 'Lorekeeper') }} -@yield('title')">
-    <meta name="description" content="@if (View::hasSection('meta-desc')) @yield('meta-desc') @else {{ config('lorekeeper.settings.site_desc', 'A Lorekeeper ARPG') }} @endif">
+    <meta name="title" content="{{ config('lorekeeper.settings.site_name', 'Lorekeeper') }}{!! View::hasSection('title') ? ' - ' . trim(View::getSection('title')) : '' !!}">
+    <meta name="description" content="{!! View::hasSection('meta-desc') ? trim(strip_tags(View::getSection('meta-desc'))) : config('lorekeeper.settings.site_desc', 'A Lorekeeper ARPG') !!}">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ config('app.url', 'http://localhost') }}">
-    <meta property="og:image" content="@if (View::hasSection('meta-img')) @yield('meta-img') @else {{ asset('images/meta-image.png') }} @endif">
-    <meta property="og:title" content="{{ config('lorekeeper.settings.site_name', 'Lorekeeper') }} -@yield('title')">
-    <meta property="og:description" content="@if (View::hasSection('meta-desc')) @yield('meta-desc') @else {{ config('lorekeeper.settings.site_desc', 'A Lorekeeper ARPG') }} @endif">
+    <meta property="og:image" content="{{ View::hasSection('meta-img') ? View::getSection('meta-img') : asset('images/meta-image.png') }}">
+    <meta property="og:title" content="{{ config('lorekeeper.settings.site_name', 'Lorekeeper') }}{!! View::hasSection('title') ? ' - ' . trim(View::getSection('title')) : '' !!}">
+    <meta property="og:description" content="{!! View::hasSection('meta-desc') ? trim(strip_tags(View::getSection('meta-desc'))) : config('lorekeeper.settings.site_desc', 'A Lorekeeper ARPG') !!}">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="{{ config('app.url', 'http://localhost') }}">
-    <meta property="twitter:image" content="@if (View::hasSection('meta-img')) @yield('meta-img') @else {{ asset('images/meta-image.png') }} @endif">
-    <meta property="twitter:title" content="{{ config('lorekeeper.settings.site_name', 'Lorekeeper') }} -@yield('title')">
-    <meta property="twitter:description" content="@if (View::hasSection('meta-desc')) @yield('meta-desc') @else {{ config('lorekeeper.settings.site_desc', 'A Lorekeeper ARPG') }} @endif">
+    <meta property="twitter:image" content="{{ View::hasSection('meta-img') ? View::getSection('meta-img') : asset('images/meta-image.png') }}">
+    <meta property="twitter:title" content="{{ config('lorekeeper.settings.site_name', 'Lorekeeper') }}{!! View::hasSection('title') ? ' - ' . trim(View::getSection('title')) : '' !!}">
+    <meta property="twitter:description" content="{!! View::hasSection('meta-desc') ? trim(strip_tags(View::getSection('meta-desc'))) : config('lorekeeper.settings.site_desc', 'A Lorekeeper ARPG') !!}">
 
     <!-- No AI scraping directives -->
     <meta name="robots" content="noai">
@@ -47,8 +47,10 @@
     <script src="{{ asset('js/tinymce.min.js') }}"></script>
     <script src="{{ asset('js/jquery.tinymce.min.js') }}"></script>
     <script defer src="{{ asset('js/bootstrap-colorpicker.min.js') }}"></script>
+    <script src="{{ asset('js/bs-custom-file-input.min.js') }}"></script>
     <script defer src="{{ asset('js/jquery-ui-timepicker-addon.js') }}"></script>
     <script defer src="{{ asset('js/croppie.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.ui.touch-punch.min.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -59,7 +61,7 @@
     <link href="{{ asset('css/lorekeeper.css?v=' . filemtime(public_path('css/lorekeeper.css'))) }}" rel="stylesheet">
 
     {{-- Font Awesome --}}
-    <link defer href="{{ asset('css/all.min.css') }}" rel="stylesheet">
+    <link defer href="{{ faVersion() }}" rel="stylesheet">
 
     {{-- jQuery UI --}}
     <link defer href="{{ asset('css/jquery-ui.min.css') }}" rel="stylesheet">
@@ -74,10 +76,12 @@
     <link defer href="{{ asset('css/selectize.bootstrap4.css') }}" rel="stylesheet">
 
     @if (file_exists(public_path() . '/css/custom.css'))
-        <link href="{{ asset('css/custom.css') . '?v=' . filemtime(public_path('css/lorekeeper.css')) }}" rel="stylesheet">
+        <link href="{{ asset('css/custom.css') . '?v=' . filemtime(public_path('css/custom.css')) }}" rel="stylesheet">
     @endif
 
     @include('feed::links')
+
+    @yield('head')
 </head>
 
 <body>
@@ -141,29 +145,19 @@
         @yield('scripts')
         @include('layouts._pagination_js')
         <script>
-            $(function() {
+            $(document).on('focusin', function(e) {
+                if ($(e.target).closest(".tox-tinymce, .tox-tinymce-aux, .moxman-window, .tam-assetmanager-root").length) {
+                    e.stopImmediatePropagation();
+                }
+            });
+
+            $(document).ready(function() {
                 $('[data-toggle="tooltip"]').tooltip({
                     html: true
                 });
                 $('.cp').colorpicker();
-                tinymce.init({
-                    selector: '.wysiwyg',
-                    height: 500,
-                    menubar: false,
-                    convert_urls: false,
-                    plugins: [
-                        'advlist autolink lists link image charmap print preview anchor',
-                        'searchreplace visualblocks code fullscreen spoiler',
-                        'insertdatetime media table paste code help wordcount'
-                    ],
-                    toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | spoiler-add spoiler-remove | removeformat | code',
-                    content_css: [
-                        '{{ asset('css/app.css') }}',
-                        '{{ asset('css/lorekeeper.css') }}'
-                    ],
-                    spoiler_caption: 'Toggle Spoiler',
-                    target_list: false
-                });
+
+                bsCustomFileInput.init();
                 var $mobileMenuButton = $('#mobileMenuButton');
                 var $sidebar = $('#sidebar');
                 $('#mobileMenuButton').on('click', function(e) {
