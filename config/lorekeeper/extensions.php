@@ -144,6 +144,19 @@ return [
     // Show Species-only traits in dropdown - Speedy
     'show_exclusively_species_traits_in_dropdown' => 0, // If enabled, will only show traits from the associated species as well as traits that aren't species-limited in the dropdown menus.
 
+    // Prompt Submission Limits (Time Based) - Juni
+    'limit_periods' => [
+        null        => 'None',
+        'Hour'      => 'Hour',
+        'Day'       => 'Day',
+        'Week'      => 'Week',
+        'BiWeekly'  => 'Bi-Weekly', // This is once every two weeks.
+        'Month'     => 'Month',
+        'BiMonthly' => 'Bi-Monthly', // This is once every two months.
+        'Quarter'   => 'Quarter', // This is once every three months.
+        'Year'      => 'Year',
+    ],
+  
     // Limit Userpage Sublists to Characters - Speedy
     'limit_userpage_sublists_to_characters' => 0, // If enabled, will only show sub masterlists on user pages that the characters owned by the user belong to.
 ];
