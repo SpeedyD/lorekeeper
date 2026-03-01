@@ -530,7 +530,7 @@ class SubmissionManager extends Service {
                 SubmissionCharacter::create([
                     'character_id'  => $c->id,
                     'submission_id' => $submission->id,
-                    'data'          => getDataReadyAssets($assets),
+                    'data'          => getDataReadyAssets($assets, true),
                 ]);
             }
 
@@ -778,7 +778,7 @@ class SubmissionManager extends Service {
 
         // Get a list of rewards, then create the submission itself
         $promptRewards = createAssetsArray();
-        $characterRewards = createAssetsArray();
+        $characterRewards = createAssetsArray(true);
         if ($submission->status == 'Pending' && isset($submission->prompt_id) && $submission->prompt_id) {
             foreach ($submission->prompt->rewards as $reward) {
                 if ($reward->rewardable_recipient == 'User') {
@@ -817,14 +817,14 @@ class SubmissionManager extends Service {
 
             // Remove character default rewards
             foreach ($submission->characters as $c) {
-                $cRewards = parseAssetData($c->data);
+                $cRewards = parseAssetData($c->data, true);
                 foreach ($submission->prompt->rewards as $reward) {
                     if ($reward->rewardable_recipient != 'Character') {
                         continue;
                     }
                     removeAsset($cRewards, $reward->reward, $reward->quantity);
                 }
-                $c->update(['data' => getDataReadyAssets($cRewards)]);
+                $c->update(['data' => getDataReadyAssets($cRewards, true)]);
             }
         }
 
@@ -890,7 +890,7 @@ class SubmissionManager extends Service {
             $assets = $this->processRewards($data + ['character_id' => $c->id, 'currencies' => $currencies, 'items' => $items, 'tables' => $tables], true);
 
             if ($defaultRewards) {
-                $assets = mergeAssetsArrays($assets, $defaultRewards);
+                $assets = mergeAssetsArrays($assets, $defaultRewards, true);
             }
 
             // Now we have a clean set of assets (redundant data is gone, duplicate entries are merged)
@@ -898,7 +898,7 @@ class SubmissionManager extends Service {
             SubmissionCharacter::create([
                 'character_id'  => $c->id,
                 'submission_id' => $submission->id,
-                'data'          => getDataReadyAssets($assets),
+                'data'          => getDataReadyAssets($assets, true),
             ]);
         }
 
