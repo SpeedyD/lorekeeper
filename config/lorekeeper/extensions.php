@@ -156,4 +156,7 @@ return [
         'Quarter'   => 'Quarter', // This is once every three months.
         'Year'      => 'Year',
     ],
+
+    // Admin Notifications - Uri, port by Speedy
+    'admin_notifications' => 1, // If enabled, will show a number next to the admin crown signifying the number of items waiting in queue. (Can be turned off per user.)
 ];

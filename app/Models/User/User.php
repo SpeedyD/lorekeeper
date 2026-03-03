@@ -746,10 +746,14 @@ class User extends Authenticatable implements MustVerifyEmail {
         $count[] = $this->hasPower('manage_reports') ? Report::assignedToMe($this)->count() : 0; // assignedReportCount
 
         // If Adoption Center is installed:
-        // $count[] = $this->hasPower('manage_submissions') && $this->hasPower('manage_characters') ? Surrender::where('status', 'Pending')->count() : 0; //surrenderCount
+        if (class_exists(Surrender::class)) {
+            $count[] = $this->hasPower('manage_submissions') && $this->hasPower('manage_characters') ? Surrender::where('status', 'Pending')->count() : 0; //surrenderCount
+        }
 
         // If Affiliates is installed:
-        // $count[] = $this->hasPower('manage_affiliates')     ? Affiliate::where('status', 'Pending')->count()                                : 0; //affiliateCount
+        if (class_exists(Affiliate::class)) {
+            $count[] = $this->hasPower('manage_affiliates')     ? Affiliate::where('status', 'Pending')->count()                                : 0; //affiliateCount
+        }
 
         return array_sum($count);
     }
