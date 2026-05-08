@@ -23,7 +23,7 @@ use App\Models\Rank\RankPower;
 use App\Models\Report\Report;
 use App\Models\Shop\ShopLog;
 use App\Models\Submission\Submission;
-use App\Models\Trade;
+use App\Models\Trade\Trade;
 use App\Traits\Commenter;
 use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
