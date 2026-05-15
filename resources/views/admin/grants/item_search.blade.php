@@ -38,10 +38,10 @@
         </ul>
         <div class="tab-content my-2">
             <div class="tab-pane fade show active" id="users">
-                @include('admin.grants._user_items', [ 'users' => $users])
+                @include('admin.grants._user_items', ['users' => $users])
             </div>
             <div class="tab-pane fade" id="characters">
-                @include('admin.grants._character_items', [ 'characters' => $characters])
+                @include('admin.grants._character_items', ['characters' => $characters])
             </div>
         </div>
     @endif
@@ -51,5 +51,4 @@
             $('.selectize').selectize();
         });
     </script>
-
 @endsection
