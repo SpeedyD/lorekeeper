@@ -15,6 +15,7 @@ class SitePage extends Model {
     protected $fillable = [
         'key', 'title', 'text', 'parsed_text', 'is_visible', 'can_comment', 'allow_dislikes',
         'has_image', 'hash',
+        'image_extension',
     ];
 
     /**
@@ -40,7 +41,6 @@ class SitePage extends Model {
         'key'   => 'required|unique:site_pages|between:3,25|alpha_dash',
         'title' => 'required|between:3,100',
         'text'  => 'nullable',
-        'image' => 'mimes:png',
     ];
 
     /**
@@ -52,7 +52,6 @@ class SitePage extends Model {
         'key'   => 'required|between:3,25|alpha_dash',
         'title' => 'required|between:3,100',
         'text'  => 'nullable',
-        'image' => 'mimes:png',
     ];
 
     /**********************************************************************************************
@@ -110,7 +109,7 @@ class SitePage extends Model {
      * @return string
      */
     public function getImageFileNameAttribute() {
-        return $this->id.'-'.$this->hash.'-image.png';
+        return $this->id.'-'.$this->hash.'-image.'.$this->image_extension;
     }
 
     /**
