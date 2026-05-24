@@ -56,61 +56,76 @@ return new class extends Migration {
         Schema::table('shops', function (Blueprint $table) {
             $table->string('image_extension')->nullable()->after('has_image')->default('png');
         });
+        //
+        Schema::table('news', function (Blueprint $table) {
+            $table->string('image_extension')->nullable()->after('has_image')->default('png');
+        });
+        Schema::table('sales', function (Blueprint $table) {
+            $table->string('image_extension')->nullable()->after('has_image')->default('png');
+        });
+        Schema::table('site_pages', function (Blueprint $table) {
+            $table->string('image_extension')->nullable()->after('has_image')->default('png');
+        });
     }
 
     /**
      * Reverse the migrations.
      */
     public function down(): void {
+        Schema::table('character_categories', function (Blueprint $table) {
+            $table->dropIfExists('image_extension');
+        });
+        Schema::table('items', function (Blueprint $table) {
+            $table->dropIfExists('image_extension');
+        });
+        Schema::table('item_categories', function (Blueprint $table) {
+            $table->dropIfExists('image_extension');
+        });
         //
-        try {
-            Schema::table('character_categories', function (Blueprint $table) {
-                $table->dropColumn('image_extension');
-            });
-            Schema::table('items', function (Blueprint $table) {
-                $table->dropColumn('image_extension');
-            });
-            Schema::table('item_categories', function (Blueprint $table) {
-                $table->dropColumn('image_extension');
-            });
-            //
-            Schema::table('features', function (Blueprint $table) {
-                $table->dropColumn('image_extension');
-            });
-            Schema::table('feature_categories', function (Blueprint $table) {
-                $table->dropColumn('image_extension');
-            });
-            //
-            Schema::table('prompts', function (Blueprint $table) {
-                $table->dropColumn('image_extension');
-            });
-            Schema::table('prompt_categories', function (Blueprint $table) {
-                $table->dropColumn('image_extension');
-            });
-            //
-            Schema::table('rarities', function (Blueprint $table) {
-                $table->dropColumn('image_extension');
-            });
-            //
-            Schema::table('specieses', function (Blueprint $table) {
-                $table->dropColumn('image_extension');
-            });
-            Schema::table('subtypes', function (Blueprint $table) {
-                $table->dropColumn('image_extension');
-            });
-            //
-            Schema::table('currencies', function (Blueprint $table) {
-                $table->dropColumn(['image_extension', 'icon_extension']);
-            });
-            Schema::table('currency_categories', function (Blueprint $table) {
-                $table->dropColumn('image_extension');
-            });
-            //
-            Schema::table('shops', function (Blueprint $table) {
-                $table->dropColumn('image_extension');
-            });
-        } catch (Exception $e) {
-            //
-        }
+        Schema::table('features', function (Blueprint $table) {
+            $table->dropIfExists('image_extension');
+        });
+        Schema::table('feature_categories', function (Blueprint $table) {
+            $table->dropIfExists('image_extension');
+        });
+        //
+        Schema::table('prompts', function (Blueprint $table) {
+            $table->dropIfExists('image_extension');
+        });
+        Schema::table('prompt_categories', function (Blueprint $table) {
+            $table->dropIfExists('image_extension');
+        });
+        //
+        Schema::table('rarities', function (Blueprint $table) {
+            $table->dropIfExists('image_extension');
+        });
+        //
+        Schema::table('specieses', function (Blueprint $table) {
+            $table->dropIfExists('image_extension');
+        });
+        Schema::table('subtypes', function (Blueprint $table) {
+            $table->dropIfExists('image_extension');
+        });
+        //
+        Schema::table('currencies', function (Blueprint $table) {
+            $table->dropIfExists(['image_extension', 'icon_extension']);
+        });
+        Schema::table('currency_categories', function (Blueprint $table) {
+            $table->dropIfExists('image_extension');
+        });
+        //
+        Schema::table('shops', function (Blueprint $table) {
+            $table->dropIfExists('image_extension');
+        });
+        //
+        Schema::table('news', function (Blueprint $table) {
+            $table->dropIfExists('image_extension');
+        });
+        Schema::table('sales', function (Blueprint $table) {
+            $table->dropIfExists('image_extension');
+        });
+        Schema::table('site_pages', function (Blueprint $table) {
+            $table->dropIfExists('image_extension');
+        });
     }
 };

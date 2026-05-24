@@ -205,7 +205,7 @@ class CurrencyService extends Service {
 
             $data = $this->populateData($data);
 
-            $icon = $image = null;
+            $icon = null;
             if (isset($data['icon']) && $data['icon']) {
                 $data['has_icon'] = 1;
                 $data['icon_extension'] = $data['icon']->getClientOriginalExtension();
@@ -215,6 +215,7 @@ class CurrencyService extends Service {
                 $data['has_icon'] = 0;
             }
 
+            $image = null;
             if (isset($data['image']) && $data['image']) {
                 $data['has_image'] = 1;
                 $data['image_extension'] = $data['image']->getClientOriginalExtension();
