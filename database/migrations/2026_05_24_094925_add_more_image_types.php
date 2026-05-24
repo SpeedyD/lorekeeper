@@ -74,7 +74,7 @@ return new class extends Migration {
     public function down(): void {
         Schema::table('character_categories', function (Blueprint $table) {
             $table->dropIfExists('image_extension');
-       });
+        });
         Schema::table('items', function (Blueprint $table) {
             $table->dropIfExists('image_extension');
         });
