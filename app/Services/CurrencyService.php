@@ -215,7 +215,7 @@ class CurrencyService extends Service {
                 $data['has_icon'] = 0;
             }
 
-            $image = null
+            $image = null;
             if (isset($data['image']) && $data['image']) {
                 $data['has_image'] = 1;
                 $data['image_extension'] = $data['image']->getClientOriginalExtension();
