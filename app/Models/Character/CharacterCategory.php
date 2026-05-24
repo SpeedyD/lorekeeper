@@ -12,6 +12,7 @@ class CharacterCategory extends Model {
      */
     protected $fillable = [
         'code', 'name', 'sort', 'has_image', 'description', 'parsed_description', 'masterlist_sub_id', 'is_visible', 'hash',
+        'image_extension',
     ];
 
     /**
@@ -30,7 +31,6 @@ class CharacterCategory extends Model {
         'name'        => 'required|unique:character_categories|between:3,100',
         'code'        => 'required|unique:character_categories|between:1,25',
         'description' => 'nullable',
-        'image'       => 'mimes:png',
     ];
 
     /**
@@ -42,7 +42,6 @@ class CharacterCategory extends Model {
         'name'        => 'required|between:3,100',
         'code'        => 'required|between:1,25',
         'description' => 'nullable',
-        'image'       => 'mimes:png',
     ];
 
     /**********************************************************************************************
@@ -110,7 +109,7 @@ class CharacterCategory extends Model {
      * @return string
      */
     public function getCategoryImageFileNameAttribute() {
-        return $this->id.'-'.$this->hash.'-image.png';
+        return $this->id.'-'.$this->hash.'-image.'.$this->image_extension;
     }
 
     /**

@@ -15,7 +15,7 @@ class Prompt extends Model {
      */
     protected $fillable = [
         'prompt_category_id', 'name', 'summary', 'description', 'parsed_description', 'is_active',
-        'start_at', 'end_at', 'hide_before_start', 'hide_after_end', 'has_image', 'prefix',
+        'start_at', 'end_at', 'hide_before_start', 'hide_after_end', 'has_image', 'image_extension', 'prefix',
         'hide_submissions', 'staff_only', 'hash',
         'limit', 'limit_period', 'limit_character',
     ];
@@ -48,7 +48,6 @@ class Prompt extends Model {
         'prefix'             => 'nullable|unique:prompts|between:2,10',
         'summary'            => 'nullable',
         'description'        => 'nullable',
-        'image'              => 'mimes:png',
     ];
 
     /**
@@ -62,7 +61,6 @@ class Prompt extends Model {
         'prefix'             => 'nullable|between:2,10',
         'summary'            => 'nullable',
         'description'        => 'nullable',
-        'image'              => 'mimes:png',
     ];
 
     /**********************************************************************************************
@@ -269,7 +267,7 @@ class Prompt extends Model {
      * @return string
      */
     public function getImageFileNameAttribute() {
-        return $this->id.'-'.$this->hash.'-image.png';
+        return $this->id.'-'.$this->hash.'-image.'.$this->image_extension;
     }
 
     /**

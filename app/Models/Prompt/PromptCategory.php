@@ -12,6 +12,7 @@ class PromptCategory extends Model {
      */
     protected $fillable = [
         'name', 'sort', 'has_image', 'description', 'parsed_description', 'hash', 'parent_id',
+        'image_extension',
     ];
 
     /**
@@ -28,7 +29,6 @@ class PromptCategory extends Model {
     public static $createRules = [
         'name'        => 'required|unique:prompt_categories|between:3,100',
         'description' => 'nullable',
-        'image'       => 'mimes:png',
     ];
 
     /**
@@ -39,7 +39,6 @@ class PromptCategory extends Model {
     public static $updateRules = [
         'name'        => 'required|between:3,100',
         'description' => 'nullable',
-        'image'       => 'mimes:png',
     ];
 
     /**********************************************************************************************
@@ -92,7 +91,7 @@ class PromptCategory extends Model {
      * @return string
      */
     public function getCategoryImageFileNameAttribute() {
-        return $this->id.'-'.$this->hash.'-image.png';
+        return $this->id.'-'.$this->hash.'-image.'.$this->image_extension;
     }
 
     /**

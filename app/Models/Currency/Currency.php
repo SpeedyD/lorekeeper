@@ -15,6 +15,7 @@ class Currency extends Model {
         'name', 'abbreviation', 'description', 'parsed_description', 'sort_user', 'sort_character',
         'is_displayed', 'allow_user_to_user', 'allow_user_to_character', 'allow_character_to_user',
         'has_icon', 'has_image', 'hash', 'is_visible',
+        'image_extension', 'icon_extension',
     ];
 
     /**
@@ -32,8 +33,6 @@ class Currency extends Model {
         'name'         => 'required|unique:currencies|between:3,100',
         'abbreviation' => 'nullable|unique:currencies|between:1,25',
         'description'  => 'nullable',
-        'icon'         => 'mimes:png',
-        'image'        => 'mimes:png',
     ];
 
     /**
@@ -45,8 +44,6 @@ class Currency extends Model {
         'name'         => 'required|between:3,100',
         'abbreviation' => 'nullable|between:1,25',
         'description'  => 'nullable',
-        'icon'         => 'mimes:png',
-        'image'        => 'mimes:png',
     ];
 
     /**********************************************************************************************
@@ -166,7 +163,7 @@ class Currency extends Model {
      * @return string
      */
     public function getCurrencyImageFileNameAttribute() {
-        return $this->id.'-'.$this->hash.'-image.png';
+        return $this->id.'-'.$this->hash.'-image.'.$this->image_extension;
     }
 
     /**
@@ -175,7 +172,7 @@ class Currency extends Model {
      * @return string
      */
     public function getCurrencyIconFileNameAttribute() {
-        return $this->id.'-'.$this->hash.'-icon.png';
+        return $this->id.'-'.$this->hash.'-icon.'.$this->icon_extension;
     }
 
     /**

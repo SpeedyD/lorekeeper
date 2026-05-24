@@ -16,7 +16,7 @@ class Item extends Model {
      * @var array
      */
     protected $fillable = [
-        'item_category_id', 'name', 'has_image', 'description', 'parsed_description', 'allow_transfer',
+        'item_category_id', 'name', 'has_image', 'image_extension', 'description', 'parsed_description', 'allow_transfer',
         'data', 'reference_url', 'artist_alias', 'artist_url', 'artist_id', 'is_released', 'hash', 'is_deletable',
     ];
 
@@ -56,7 +56,6 @@ class Item extends Model {
         'item_category_id'   => 'nullable',
         'name'               => 'required|unique:items|between:3,100',
         'description'        => 'nullable',
-        'image'              => 'mimes:png',
         'rarity_id'          => 'nullable',
         'reference_url'      => 'nullable|between:3,200',
         'uses'               => 'nullable|between:3,250',
@@ -73,7 +72,6 @@ class Item extends Model {
         'item_category_id'  => 'nullable',
         'name'              => 'required|between:3,100',
         'description'       => 'nullable',
-        'image'             => 'mimes:png',
         'reference_url'     => 'nullable|between:3,200',
         'uses'              => 'nullable|between:3,250',
         'release'           => 'nullable|between:3,100',
@@ -212,7 +210,7 @@ class Item extends Model {
      * @return string
      */
     public function getImageFileNameAttribute() {
-        return $this->id.'-'.$this->hash.'-image.png';
+        return $this->id.'-'.$this->hash.'-image.'.$this->image_extension;
     }
 
     /**
