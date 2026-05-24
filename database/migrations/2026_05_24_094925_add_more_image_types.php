@@ -56,6 +56,16 @@ return new class extends Migration {
         Schema::table('shops', function (Blueprint $table) {
             $table->string('image_extension')->nullable()->after('has_image')->default('png');
         });
+        //
+        Schema::table('news', function (Blueprint $table) {
+            $table->string('image_extension')->nullable()->after('has_image')->default('png');
+        });
+        Schema::table('sales', function (Blueprint $table) {
+            $table->string('image_extension')->nullable()->after('has_image')->default('png');
+        });
+        Schema::table('site_pages', function (Blueprint $table) {
+            $table->string('image_extension')->nullable()->after('has_image')->default('png');
+        });
     }
 
     /**
@@ -107,6 +117,16 @@ return new class extends Migration {
             });
             //
             Schema::table('shops', function (Blueprint $table) {
+                $table->dropColumn('image_extension');
+            });
+            //
+            Schema::table('news', function (Blueprint $table) {
+                $table->dropColumn('image_extension');
+            });
+            Schema::table('sales', function (Blueprint $table) {
+                $table->dropColumn('image_extension');
+            });
+            Schema::table('site_pages', function (Blueprint $table) {
                 $table->dropColumn('image_extension');
             });
         } catch (Exception $e) {
