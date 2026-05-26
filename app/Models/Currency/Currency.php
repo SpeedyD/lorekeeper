@@ -33,7 +33,7 @@ class Currency extends Model {
         'name'         => 'required|unique:currencies|between:3,100',
         'abbreviation' => 'nullable|unique:currencies|between:1,25',
         'description'  => 'nullable',
-        'icon'        => 'mimes:png,gif,jpg,bmp,webp,apng',
+        'icon'         => 'mimes:png,gif,jpg,bmp,webp,apng',
         'image'        => 'mimes:png,gif,jpg,bmp,webp,apng',
     ];
 
@@ -46,7 +46,7 @@ class Currency extends Model {
         'name'         => 'required|between:3,100',
         'abbreviation' => 'nullable|between:1,25',
         'description'  => 'nullable',
-        'icon'        => 'mimes:png,gif,jpg,bmp,webp,apng',
+        'icon'         => 'mimes:png,gif,jpg,bmp,webp,apng',
         'image'        => 'mimes:png,gif,jpg,bmp,webp,apng',
     ];
 

@@ -56,7 +56,7 @@ class Item extends Model {
         'item_category_id'   => 'nullable',
         'name'               => 'required|unique:items|between:3,100',
         'description'        => 'nullable',
-        'image'             => 'mimes:png,gif,jpg,bmp,webp,apng',
+        'image'              => 'mimes:png,gif,jpg,bmp,webp,apng',
         'rarity_id'          => 'nullable',
         'reference_url'      => 'nullable|between:3,200',
         'uses'               => 'nullable|between:3,250',
