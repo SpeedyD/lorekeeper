@@ -41,7 +41,7 @@ class SitePage extends Model {
         'key'   => 'required|unique:site_pages|between:3,25|alpha_dash',
         'title' => 'required|between:3,100',
         'text'  => 'nullable',
-        'image' => 'mimes:png,gif,jpg,bmp,webp,apng',
+        'image' => 'mimes:png,gif,jpg,jpeg,webp,apng',
     ];
 
     /**
@@ -53,7 +53,7 @@ class SitePage extends Model {
         'key'   => 'required|between:3,25|alpha_dash',
         'title' => 'required|between:3,100',
         'text'  => 'nullable',
-        'image' => 'mimes:png,gif,jpg,bmp,webp,apng',
+        'image' => 'mimes:png,gif,jpg,jpeg,webp,apng',
     ];
 
     /**********************************************************************************************

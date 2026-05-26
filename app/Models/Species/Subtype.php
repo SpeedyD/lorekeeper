@@ -32,7 +32,7 @@ class Subtype extends Model {
         'species_id'  => 'required',
         'name'        => 'required|between:3,100',
         'description' => 'nullable',
-        'image'       => 'mimes:png,gif,jpg,bmp,webp,apng',
+        'image'       => 'mimes:png,gif,jpg,jpeg,webp,apng',
     ];
 
     /**
@@ -44,7 +44,7 @@ class Subtype extends Model {
         'species_id'  => 'required',
         'name'        => 'required|between:3,100',
         'description' => 'nullable',
-        'image'       => 'mimes:png,gif,jpg,bmp,webp,apng',
+        'image'       => 'mimes:png,gif,jpg,jpeg,webp,apng',
     ];
 
     /**********************************************************************************************

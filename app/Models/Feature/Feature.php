@@ -36,7 +36,7 @@ class Feature extends Model {
         'rarity_id'           => 'required|exists:rarities,id',
         'name'                => 'required|unique:features|between:3,100',
         'description'         => 'nullable',
-        'image'               => 'mimes:png,gif,jpg,bmp,webp,apng',
+        'image'               => 'mimes:png,gif,jpg,jpeg,webp,apng',
     ];
 
     /**
@@ -50,7 +50,7 @@ class Feature extends Model {
         'rarity_id'           => 'required|exists:rarities,id',
         'name'                => 'required|between:3,100',
         'description'         => 'nullable',
-        'image'               => 'mimes:png,gif,jpg,bmp,webp,apng',
+        'image'               => 'mimes:png,gif,jpg,jpeg,webp,apng',
     ];
 
     /**********************************************************************************************

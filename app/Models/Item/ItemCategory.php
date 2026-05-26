@@ -30,7 +30,7 @@ class ItemCategory extends Model {
     public static $createRules = [
         'name'        => 'required|unique:item_categories|between:3,100',
         'description' => 'nullable',
-        'image'       => 'mimes:png,gif,jpg,bmp,webp,apng',
+        'image'       => 'mimes:png,gif,jpg,jpeg,webp,apng',
     ];
 
     /**
@@ -41,7 +41,7 @@ class ItemCategory extends Model {
     public static $updateRules = [
         'name'        => 'required|between:3,100',
         'description' => 'nullable',
-        'image'       => 'mimes:png,gif,jpg,bmp,webp,apng',
+        'image'       => 'mimes:png,gif,jpg,jpeg,webp,apng',
     ];
 
     /**********************************************************************************************

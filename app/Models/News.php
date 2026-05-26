@@ -53,7 +53,7 @@ class News extends Model implements Feedable {
     public static $createRules = [
         'title' => 'required|between:3,100',
         'text'  => 'required',
-        'image' => 'mimes:png,gif,jpg,bmp,webp,apng',
+        'image' => 'mimes:png,gif,jpg,jpeg,webp,apng',
     ];
 
     /**
@@ -64,7 +64,7 @@ class News extends Model implements Feedable {
     public static $updateRules = [
         'title' => 'required|between:3,100',
         'text'  => 'required',
-        'image' => 'mimes:png,gif,jpg,bmp,webp,apng',
+        'image' => 'mimes:png,gif,jpg,jpeg,webp,apng',
     ];
 
     /**********************************************************************************************
